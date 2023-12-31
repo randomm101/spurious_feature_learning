@@ -180,7 +180,7 @@ class TokenizeTransform:
 
     def __call__(self, text):
         tokens = self.tokenizer(
-            text,
+            str(text),
             padding="max_length",
             truncation=True,
             max_length=220,
