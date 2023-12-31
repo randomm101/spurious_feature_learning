@@ -231,8 +231,8 @@ def main(args):
     if args.ckpt_path and args.load_from_checkpoint:
         print(f"Loading weights {args.ckpt_path}")
         ckpt_dict = torch.load(args.ckpt_path)
+
         ckpt_dict = ckpt_dict["algorithm"]
-        
         new_ckpt_dict = OrderedDict()
         for k, v in ckpt_dict.items():
             new_ckpt_dict[k.replace("model.", "")] = v
@@ -248,8 +248,8 @@ def main(args):
             b = ckpt_dict["fc.bias"]
             b_ = torch.zeros((2,))
             b_[1] = b
-            ckpt_dict["fc.weight"] = w_
-            ckpt_dict["fc.bias"] = b_
+            ckpt_dict["classifier.weight"] = w_
+            ckpt_dict["classifier.bias"] = b_
             model.load_state_dict(ckpt_dict)
     else:
         print("Using initial weights")
