@@ -235,7 +235,10 @@ def main(args):
         ckpt_dict = ckpt_dict["algorithm"]
         new_ckpt_dict = OrderedDict()
         for k, v in ckpt_dict.items():
-            new_ckpt_dict[k.replace("model.", "")] = v
+            k = k.replace("model.", "")
+            new_ckpt_dict[k] = v
+            if k.startswith("fc."):
+                new_ckpt_dict[k.replace("fc", "classifier")] = v
         ckpt_dict = new_ckpt_dict
 
         try:
