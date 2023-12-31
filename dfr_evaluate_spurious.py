@@ -242,7 +242,7 @@ def main(args):
         ckpt_dict = new_ckpt_dict
 
         try:
-            model.load_state_dict(ckpt_dict)
+            model.load_state_dict(ckpt_dict, strict=False)
         except:
             print("Loading one-output Checkpoint")
             w = ckpt_dict["classifier.weight"]
