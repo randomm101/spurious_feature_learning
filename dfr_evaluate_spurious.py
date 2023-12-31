@@ -237,8 +237,8 @@ def main(args):
         for k, v in ckpt_dict.items():
             k = k.replace("model.", "")
             new_ckpt_dict[k] = v
-            if k.startswith("fc."):
-                new_ckpt_dict[k.replace("fc", "classifier")] = v
+            if k.startswith("classifier"):
+                new_ckpt_dict[k.replace("classifier", "fc")] = v
         ckpt_dict = new_ckpt_dict
 
         try:
