@@ -242,10 +242,10 @@ def main(args):
             model.load_state_dict(ckpt_dict)
         except:
             print("Loading one-output Checkpoint")
-            w = ckpt_dict["fc.weight"]
+            w = ckpt_dict["classifier.weight"]
             w_ = torch.zeros((2, w.shape[1]))
             w_[1, :] = w
-            b = ckpt_dict["fc.bias"]
+            b = ckpt_dict["classifier.bias"]
             b_ = torch.zeros((2,))
             b_[1] = b
             ckpt_dict["classifier.weight"] = w_
