@@ -197,6 +197,9 @@ def dfr_on_validation_eval(
         with open(linear_model_path, 'wb') as f:
             pickle.dump(linear_model, f)
 
+        save_dir = os.path.join(dir_linear_model, os.path.basename(args.result_path)[:-4] + "test_predictions.npz")
+        np.savez(save_dir, preds_test=preds_test)
+
     return test_accs, test_mean_acc, train_accs
 
 
