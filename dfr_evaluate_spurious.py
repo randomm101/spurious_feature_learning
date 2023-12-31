@@ -8,6 +8,7 @@ import sys
 import tqdm
 import json
 import pickle
+from collections import OrderedDict
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
@@ -231,6 +232,12 @@ def main(args):
         print(f"Loading weights {args.ckpt_path}")
         ckpt_dict = torch.load(args.ckpt_path)
         ckpt_dict = ckpt_dict["algorithm"]
+        
+        new_ckpt_dict = OrderedDict()
+        for k, v in ckpt_dict.items():
+            new_ckpt_dict[k.replace("model.", "")] = v
+        ckpt_dict = new_ckpt_dict
+
         try:
             model.load_state_dict(ckpt_dict)
         except:
