@@ -230,6 +230,7 @@ def main(args):
     if args.ckpt_path and args.load_from_checkpoint:
         print(f"Loading weights {args.ckpt_path}")
         ckpt_dict = torch.load(args.ckpt_path)
+        ckpt_dict = ckpt_dict["algorithm"]
         try:
             model.load_state_dict(ckpt_dict)
         except:
